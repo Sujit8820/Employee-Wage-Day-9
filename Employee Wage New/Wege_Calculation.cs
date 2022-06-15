@@ -8,11 +8,10 @@ namespace Employee_Wage_New
 {
     class Wege_Calculation
     {
-       
 
-            public void EmpWage()
-            {
 
+        public static int calHrs()
+        {
             Random random = new Random();
             int empCheck = random.Next(0, 3);
 
@@ -30,24 +29,39 @@ namespace Employee_Wage_New
 
                 case ABSENT:
                     workingHrs = 0;
-                    Console.WriteLine("Employee is Absent");
                     break;
 
                 case FULLTIME:
                     workingHrs = 8;
-                    Console.WriteLine("Employee is full time present");
                     break;
 
                 default:
                     workingHrs = 4;
-                    Console.WriteLine("Employee is part time present");
                     break;
             }
 
             int empWage = WAGEPERHRS * workingHrs;
+            return empWage;
 
-            Console.WriteLine("Employee Wage "+ empWage);
+        }
+
+        public void EmpWage()
+        {
+            Console.WriteLine("Wellcome to Employee Wage Program\n");
+
+            int day = 0;
+            int empTotalWage = 0;
+            int MAXDAYS = 20;
+
+            while (day < MAXDAYS)
+            {
+                int empWage = Wege_Calculation.calHrs();
+                empTotalWage = empTotalWage + empWage;
+                Console.WriteLine($"Employee day {day + 1} wage is {empWage}");
+                day++;
             }
-        
+            Console.WriteLine("\nEmployee total wage is " + empTotalWage);
+
+        }
     }
 }
