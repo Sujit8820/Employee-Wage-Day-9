@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Employee_Wage_New
 {
-    class Wege_Calculation
+    class Wege_Calculation : ICompute_Emp_Wage
     {
         private const int IS_FULL_Time = 1;
         private const int IS_Part_Time = 2;
