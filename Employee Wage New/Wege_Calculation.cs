@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,20 +14,23 @@ namespace Employee_Wage_New
         private const int ABSENT = 0;
 
         private Dictionary<string, Company> companies_Dict;
-        public string[] Company_List;
+        //public string[] Company_List;
+        public ArrayList Company_List;
         public int Company_Index = 0;
 
         public Wege_Calculation(int Number)
         {
             companies_Dict = new Dictionary<string, Company>();
-            Company_List = new string[Number * 2];
+            // Company_List = new string[Number * 2];
+            Company_List = new ArrayList();
         }
         public void AddCompany(string companyName, float EmpWagePerHr, int FullTime_WorkingHrs, int PartTime_WorkingHrs, int Max_WorkingHrs, int Max_WorkingDays)
         {
             Company company_Obj = new Company(companyName.ToLower(), EmpWagePerHr, FullTime_WorkingHrs, PartTime_WorkingHrs, Max_WorkingHrs, Max_WorkingDays);
             companies_Dict.Add(companyName.ToLower(), company_Obj);
-            Company_List[Company_Index] = companyName;
-            Company_Index++;
+            Company_List.Add(companyName);
+            //Company_List[Company_Index] = companyName;
+            //Company_Index++;
         }
 
         private int GetWorkingHrs()
@@ -75,15 +79,13 @@ namespace Employee_Wage_New
                 //Console.WriteLine($"Employee day {day + 1} wage is {empWage}");
                 day++;
             }
-            Company_List[Company_Index] = Convert.ToString(empTotalWage);
-            Company_Index++;
-            /*Console.WriteLine("\nDetails of company " + company.companyName);
-            Console.WriteLine("Total working hours is " + totalWorkingHrs);
-            Console.WriteLine("Total employee wage is " + empTotalWage);*/
+            //Company_List[Company_Index] = Convert.ToString(empTotalWage);
+            Company_List.Add(empTotalWage);
+           
         }
         public void View_Wage()
         {
-            for(int i = 0; i < Company_List.Length;i+=2)
+            for(int i = 0; i < Company_List.Count;i+=2)
             {
                 Console.WriteLine("Monthly wage for "+Company_List[i] +" is "+ Company_List[i+1]);
 
