@@ -10,7 +10,7 @@ namespace Employee_Wage_New
     {
 
 
-        public static int calHrs()
+        public static int GetWorkingHrs()
         {
             Random random = new Random();
             int empCheck = random.Next(0, 3);
@@ -21,7 +21,6 @@ namespace Employee_Wage_New
             //Constants
             const int ABSENT = 0;
             const int FULLTIME = 1;
-            const int WAGEPERHRS = 20;
 
 
             switch (empCheck)
@@ -40,28 +39,36 @@ namespace Employee_Wage_New
                     break;
             }
 
-            int empWage = WAGEPERHRS * workingHrs;
-            return empWage;
+            return workingHrs;
 
-        }
+        
+    }
 
-        public void EmpWage()
+        public void empTotalWage()
         {
             Console.WriteLine("Wellcome to Employee Wage Program\n");
 
-            int day = 0;
-            int empTotalWage = 0;
-            int MAXDAYS = 20;
+        int day = 0;
+        int workingHrs = 0;
+        int totalWorkingHrs = 0;
+        int empTotalWage = 0;
+        int MAXDAYS = 20;
+        int MAXHRS = 100;
+        int WAGEPERHRS = 20;
 
-            while (day < MAXDAYS)
-            {
-                int empWage = Wege_Calculation.calHrs();
-                empTotalWage = empTotalWage + empWage;
-                Console.WriteLine($"Employee day {day + 1} wage is {empWage}");
-                day++;
-            }
-            Console.WriteLine("\nEmployee total wage is " + empTotalWage);
+        while (day < MAXDAYS && workingHrs < MAXHRS)
+        {
+            workingHrs = Wege_Calculation.GetWorkingHrs();
+            totalWorkingHrs = totalWorkingHrs + workingHrs;
 
+            int empWage = WAGEPERHRS * workingHrs;
+            empTotalWage = empTotalWage + empWage;
+
+            Console.WriteLine($"Employee day {day + 1} wage is {empWage}");
+            day++;
         }
+        Console.WriteLine("\nTotal working hours is " + totalWorkingHrs);
+        Console.WriteLine("Total employee wage is " + empTotalWage);
+    }
     }
 }

@@ -10,7 +10,7 @@ namespace Employee_Wage_New
         {
             Console.WriteLine("Wellcome to Employee Wage Program");
             Wege_Calculation emp = new Wege_Calculation();
-            emp.EmpWage();
+            emp.empTotalWage();
                 
         }
     }
