@@ -12,11 +12,21 @@ namespace Employee_Wage_New
         private const int IS_Part_Time = 2;
         private const int ABSENT = 0;
 
-        public Dictionary<string, Company> companyList = new Dictionary<string, Company>();
+        private Dictionary<string, Company> companies_Dict;
+        public string[] Company_List;
+        public int Company_Index = 0;
+
+        public Wege_Calculation(int Number)
+        {
+            companies_Dict = new Dictionary<string, Company>();
+            Company_List = new string[Number * 2];
+        }
         public void AddCompany(string companyName, float EmpWagePerHr, int FullTime_WorkingHrs, int PartTime_WorkingHrs, int Max_WorkingHrs, int Max_WorkingDays)
         {
-            Company company = new Company(companyName.ToLower(), EmpWagePerHr, FullTime_WorkingHrs, PartTime_WorkingHrs, Max_WorkingHrs, Max_WorkingDays);
-            companyList.Add(companyName.ToLower(), company);
+            Company company_Obj = new Company(companyName.ToLower(), EmpWagePerHr, FullTime_WorkingHrs, PartTime_WorkingHrs, Max_WorkingHrs, Max_WorkingDays);
+            companies_Dict.Add(companyName.ToLower(), company_Obj);
+            Company_List[Company_Index] = companyName;
+            Company_Index++;
         }
 
         private int GetWorkingHrs()
@@ -33,17 +43,14 @@ namespace Employee_Wage_New
             int totalWorkingHrs = 0;
             float empTotalWage = 0;
 
-            if (!companyList.ContainsKey(companyName.ToLower()))
+            if (!companies_Dict.ContainsKey(companyName.ToLower()))
                 throw new ArgumentNullException("Company dosen't exist");
-            companyList.TryGetValue(companyName.ToLower(), out Company company);
+            companies_Dict.TryGetValue(companyName.ToLower(), out Company company);
 
             int MAXDAYS = company.Max_WorkingDays;
             int MAXHRS = company.Max_WorkingHrs;
 
-
-
-
-            while (day <= MAXDAYS && workingHrs <= MAXHRS)
+            while (day <= MAXDAYS && workingHrs < MAXHRS)
             {
 
                 switch (GetWorkingHrs())
@@ -58,8 +65,6 @@ namespace Employee_Wage_New
                         workingHrs = company.FullTime_WorkingHrs;
                         break;
 
-
-
                 }
 
                 totalWorkingHrs = totalWorkingHrs + workingHrs;
@@ -70,9 +75,19 @@ namespace Employee_Wage_New
                 //Console.WriteLine($"Employee day {day + 1} wage is {empWage}");
                 day++;
             }
-            Console.WriteLine("\nDetails of company " + company.companyName);
+            Company_List[Company_Index] = Convert.ToString(empTotalWage);
+            Company_Index++;
+            /*Console.WriteLine("\nDetails of company " + company.companyName);
             Console.WriteLine("Total working hours is " + totalWorkingHrs);
-            Console.WriteLine("Total employee wage is " + empTotalWage);
+            Console.WriteLine("Total employee wage is " + empTotalWage);*/
+        }
+        public void View_Wage()
+        {
+            for(int i = 0; i < Company_List.Length;i+=2)
+            {
+                Console.WriteLine("Monthly wage for "+Company_List[i] +" is "+ Company_List[i+1]);
+
+            }
         }
 
 
