@@ -29,6 +29,7 @@ namespace Employee_Wage_New
             Company company_Obj = new Company(companyName.ToLower(), EmpWagePerHr, FullTime_WorkingHrs, PartTime_WorkingHrs, Max_WorkingHrs, Max_WorkingDays);
             companies_Dict.Add(companyName.ToLower(), company_Obj);
             Company_List.Add(companyName);
+            Company_List.Add(EmpWagePerHr * FullTime_WorkingHrs);
             //Company_List[Company_Index] = companyName;
             //Company_Index++;
         }
@@ -85,9 +86,9 @@ namespace Employee_Wage_New
         }
         public void View_Wage()
         {
-            for(int i = 0; i < Company_List.Count;i+=2)
+            for(int i = 0; i < Company_List.Count;i+=3)
             {
-                Console.WriteLine("Monthly wage for "+Company_List[i] +" is "+ Company_List[i+1]);
+                Console.WriteLine("Daily & monthly wage for "+Company_List[i] +" is "+ Company_List[i+1]+" , " +Company_List[i+2]+" respectively");
 
             }
         }
