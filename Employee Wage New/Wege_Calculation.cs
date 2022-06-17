@@ -84,13 +84,13 @@ namespace Employee_Wage_New
             Company_List.Add(empTotalWage);
            
         }
-        public void View_Wage()
+        public void View_Wage(string Name)
         {
-            for(int i = 0; i < Company_List.Count;i+=3)
-            {
-                Console.WriteLine("Daily & monthly wage for "+Company_List[i] +" is "+ Company_List[i+1]+" , " +Company_List[i+2]+" respectively");
+            int Index = Company_List.IndexOf(Name);
+           
+                Console.WriteLine("Daily & monthly wage for "+Company_List[Index] +" is "+ Company_List[Index + 1]+" , " +Company_List[Index + 2]+" respectively");
 
-            }
+           
         }
 
 

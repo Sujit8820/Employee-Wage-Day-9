@@ -15,7 +15,7 @@ namespace Employee_Wage_New
             emp.AddCompany("DMART", 25, 9, 5, 120, 25);
             emp.empTotalWage("DMART");
 
-            emp.View_Wage();
+            emp.View_Wage("DMART");
         }
     }
 }
